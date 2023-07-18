@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 
 import { copy, linkIcon, loader, tick } from "../assets";
 import { useLazyGetSummaryQuery } from "../services/article";
+import Nav from "./Nav";
+import whatsappIcon from "../assets/whatsapp.png";
 
 const Demo = () => {
   const [article, setArticle] = useState({
@@ -65,8 +67,23 @@ const Demo = () => {
     localStorage.setItem("articles", JSON.stringify(updatedArticles));
   };
 
+
+  const createWhatsAppShareLink = () => {
+    const text = `Check out this article summary: ${article.summary}`;
+    const encodedText = encodeURIComponent(text);
+    return `https://api.whatsapp.com/send?text=${encodedText}`;
+  };
+
+  // Function to handle sharing to WhatsApp
+  const handleShareWhatsApp = () => {
+    const shareLink = createWhatsAppShareLink();
+    window.open(shareLink, "_blank");
+  };
+
   return (
-    <section className='mt-16 w-full h-128 max-w-xl '>
+    <>
+      <Nav/>
+    <section className='mt-16 w-full h-screen max-w-xl '>
       {/* Search */}
       <div className='flex flex-col w-full gap-2'>
         <form
@@ -119,6 +136,7 @@ const Demo = () => {
               <p className='flex-1 font-satoshi text-blue-700 font-medium text-sm truncate'>
                 {item.url}
               </p>
+              
               {/* Button to delete the history*/}
                 <button class="tooltip del-btn w-10 h-10"  onClick={() => handleDelete(item.url)}>
                   
@@ -149,16 +167,21 @@ const Demo = () => {
               <h2 className='font-satoshi font-bold text-gray-600 text-xl'>
                 Article <span className='blue_gradient'>Summary</span>
               </h2>
-              <div className='summary_box'>
+              <div className='summary_box flex flex-col items-end justify-end'>
                 <p className='font-inter font-medium text-sm text-gray-700'>
                   {article.summary}
                 </p>
+              <button className="w-9 h-9 " onClick={handleShareWhatsApp}>
+                <img src={whatsappIcon} alt="whatsapp_icon" />
+              </button>
               </div>
+              {/* Button to share summary to WhatsApp */}
             </div>
           )
         )}
       </div>
     </section>
+    </>
   );
 };
 
