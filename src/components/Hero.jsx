@@ -7,7 +7,6 @@ const Hero = () => {
   return (
     <>
     <header className='w-full flex justify-center items-center flex-col '>
-      <Nav/>
 
       <h1 className='head_text'>
         Summarize Articles with <br className='max-md:hidden' />

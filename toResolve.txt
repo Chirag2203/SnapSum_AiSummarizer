@@ -1,0 +1,7 @@
+This file contains all the bugs that have been found to exist in the 
+application as of 23-07-23
+
+1. Languages are not getting fetched from Rapid API giving 429 error
+2. Translation is not working to summarize the article summary
+3. Not able to integrate website translation feature using google translate. 
+   it is persent in js and not working with react.

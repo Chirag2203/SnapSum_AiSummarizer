@@ -1,12 +1,10 @@
 // KnowMore.jsx
 import React from 'react';
-import Nav from './Nav';
 import { Link } from 'react-router-dom';
 
 const KnowMore = () => {
   return (
     <>
-    <Nav/>
     < div className='flex flex-col items-center justify-center gap-5'>
     <span className='orange_gradient text-6xl font-black'>Snap Sum</span>
     

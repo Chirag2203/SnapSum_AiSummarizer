@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 
 import { copy, linkIcon, loader, tick } from "../assets";
 import { useLazyGetSummaryQuery } from "../services/article";
-import Nav from "./Nav";
 import whatsappIcon from "../assets/whatsapp.png";
+import axios from 'axios';
 
 const Demo = () => {
   const [article, setArticle] = useState({
@@ -12,6 +12,7 @@ const Demo = () => {
   });
   const [allArticles, setAllArticles] = useState([]);
   const [copied, setCopied] = useState("");
+  const [sumcopy, setSumCopy] = useState("");
 
   // RTK lazy query
   const [getSummary, { error, isFetching }] = useLazyGetSummaryQuery();
@@ -45,7 +46,7 @@ const Demo = () => {
       setArticle(newArticle);
       setAllArticles(updatedAllArticles);
       localStorage.setItem("articles", JSON.stringify(updatedAllArticles));
-    }
+    } 
   };
 
   // copy the url and toggle the icon for user feedback
@@ -54,6 +55,12 @@ const Demo = () => {
     navigator.clipboard.writeText(copyUrl);
     setTimeout(() => setCopied(false), 3000);
   };
+  const handleSumCopy = (copySum) => {
+    setSumCopy(copySum);
+    navigator.clipboard.writeText(copySum);
+    setTimeout(() => setSumCopy(false), 3000);
+  };  
+
 
   const handleKeyDown = (e) => {
     if (e.keyCode === 13) {
@@ -79,10 +86,107 @@ const Demo = () => {
     const shareLink = createWhatsAppShareLink();
     window.open(shareLink, "_blank");
   };
+  const [languages, setLanguages] = useState([]);
+  const [selectedLanguage, setSelectedLanguage] = useState('en');
+ useEffect(() => {
+  // Function to fetch available languages
+  const fetchLanguages = async () => {
+    console.log("Fetching Languages...");
+    try {
+      const options = {
+        method: 'GET',
+        url: 'https://google-translate1.p.rapidapi.com/language/translate/v2/languages',
+        headers: {
+          'Accept-Encoding': 'application/gzip',
+          'X-RapidAPI-Key': '6d90c4ceefmsh2a38b0206a4488ep141773jsn534665224174', // Replace with your Rapid API key
+          'X-RapidAPI-Host': 'google-translate1.p.rapidapi.com'
+        }
+      };
+
+      const response = await axios.request(options);
+      console.log("Fetched Languages:", response.data.data.languages);
+      setLanguages(response.data.data.languages);
+    } catch (error) {
+      console.error("Error fetching languages:", error);
+    }
+  };
+
+  // Call the fetchLanguages function when the component mounts
+  fetchLanguages();
+}, []);
+
+
+  // Function to handle language change
+  const handleLanguageChange = (e) => {
+    setSelectedLanguage(e.target.value);
+  };
+
+     // ... (previous code)
+
+// Function to handle translation
+const handleTranslation = async () => {
+  try {
+    // Step 1: Detect the language of the input text
+    const detectOptions = {
+      method: 'POST',
+      url: 'https://google-translate1.p.rapidapi.com/language/translate/v2/detect',
+      headers: {
+        'content-type': 'application/x-www-form-urlencoded',
+        'X-RapidAPI-Key': '6d90c4ceefmsh2a38b0206a4488ep141773jsn534665224174', // Replace with your Rapid API key
+        'X-RapidAPI-Host': 'google-translate1.p.rapidapi.com'
+      },
+      data: encodedParams,
+    };
+
+    const detectResponse = await axios.request(detectOptions);
+    const detectedLanguage = detectResponse.data.data.detections[0].language;
+
+    // Step 2: Translate the input text to the selected language
+    const translateOptions = {
+      method: 'POST',
+      url: 'https://google-translate1.p.rapidapi.com/language/translate/v2/translate',
+      headers: {
+        'content-type': 'application/x-www-form-urlencoded',
+        'Accept-Encoding': 'application/gzip',
+        'X-RapidAPI-Key': '6d90c4ceefmsh2a38b0206a4488ep141773jsn534665224174', // Replace with your Rapid API key
+        'X-RapidAPI-Host': 'google-translate1.p.rapidapi.com',
+      },
+      data: {
+        q: article.summary,
+        source: detectedLanguage, // Use the detected language as the source language
+        target: selectedLanguage,
+      },
+    };
+
+    const translateResponse = await axios.request(translateOptions);
+
+    if (
+      translateResponse &&
+      translateResponse.data &&
+      translateResponse.data.data &&
+      translateResponse.data.data.translations
+    ) {
+      // Update the translated summary in the state
+      const translatedText = translateResponse.data.data.translations[0].translatedText;
+      setArticle((prevArticle) => ({
+        ...prevArticle,
+        translatedSummary: translatedText,
+      }));
+    }
+  } catch (error) {
+    console.error('Translation Error:', error);
+  }
+};
+
+// ... (remaining code)
+
+    
+
+    
+
 
   return (
     <>
-      <Nav/>
     <section className='mt-16 w-full h-screen max-w-xl '>
       {/* Search */}
       <div className='flex flex-col w-full gap-2'>
@@ -109,12 +213,7 @@ const Demo = () => {
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"></path><path fill="currentColor" d="M5 13c0-5.088 2.903-9.436 7-11.182C16.097 3.564 19 7.912 19 13c0 .823-.076 1.626-.22 2.403l1.94 1.832a.5.5 0 0 1 .095.603l-2.495 4.575a.5.5 0 0 1-.793.114l-2.234-2.234a1 1 0 0 0-.707-.293H9.414a1 1 0 0 0-.707.293l-2.234 2.234a.5.5 0 0 1-.793-.114l-2.495-4.575a.5.5 0 0 1 .095-.603l1.94-1.832C5.077 14.626 5 13.823 5 13zm1.476 6.696l.817-.817A3 3 0 0 1 9.414 18h5.172a3 3 0 0 1 2.121.879l.817.817.982-1.8-1.1-1.04a2 2 0 0 1-.593-1.82c.124-.664.187-1.345.187-2.036 0-3.87-1.995-7.3-5-8.96C8.995 5.7 7 9.13 7 13c0 .691.063 1.372.187 2.037a2 2 0 0 1-.593 1.82l-1.1 1.039.982 1.8zM12 13a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"></path></svg>
               <span>Search</span>
             </button>
-          {/* <button
-            type='submit'
-            className='submit_btn peer-focus:border-gray-700 peer-focus:text-gray-700 '
-          >
-            <p>↵</p>
-          </button> */}
+          
           
         </form>
 
@@ -138,6 +237,7 @@ const Demo = () => {
               </p>
               
               {/* Button to delete the history*/}
+              
                 <button class="tooltip del-btn w-10 h-10"  onClick={() => handleDelete(item.url)}>
                   
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20" height="25" width="25">
@@ -168,14 +268,87 @@ const Demo = () => {
                 Article <span className='blue_gradient'>Summary</span>
               </h2>
               <div className='summary_box flex flex-col items-end justify-end'>
-                <p className='font-inter font-medium text-sm text-gray-700'>
-                  {article.summary}
-                </p>
+                {/* <p className='font-inter font-medium text-sm text-gray-700'> */}
+                {article.translatedSummary ? (
+                  <p className="font-inter font-medium text-sm text-gray-700">
+                    {article.translatedSummary}
+                  </p>
+                ) : (
+                  <p className="font-inter font-medium text-sm text-gray-700">
+                    {article.summary}
+                  </p>
+                )}
+             <div className="flex gap-2 mt-3 items-center justify-center">
+              
+
+
+
+               {/* Display available languages drop down */}
+              <div className="mt-4">
+                
+                {/* <select
+                  id="languages"
+                  value={selectedLanguage}
+                  onChange={handleLanguageChange}
+                  className="w-32 bg-slate-500 border rounded-md mt-1"
+                >
+                  {languages.map((language) => (
+                    <option key={language.language} value={language.language}>
+                      {language.name}
+                    </option>
+                  ))}
+                </select> */}
+                {languages.length > 0 ? ( // Conditionally render the select element when languages are available
+                    <div>
+                      <label htmlFor="languages" className="font-satoshi font-bold text-gray-600"> </label>
+                      <span className="font-semibold">Select Language</span>
+                    <select
+                      id="languages"
+                      value={selectedLanguage}
+                      onChange={handleLanguageChange}
+                      className="w-32 bg-slate-500 border rounded-md mt-1"
+                    >
+                      {languages.map((language) => (
+                        <option
+                          className="text-blue-50"
+                          key={language.language}
+                          value={language.language}
+                        >
+                          {language.name}
+                        </option>
+               
+               ))}
+                    </select>
+               </div>
+                  ) : (
+                    
+                    <div class="flex flex-col items-center justify-center m-2 mb-3 gap-3 font-satoshi  mr-3 ">
+                       <span className="font-semibold">Select Language</span>
+                      <div class="loader2">
+                        </div>
+                    </div>
+                  )}
+
+              </div>
+              <button onClick={handleTranslation} className="p-2 border rounded-md bg-blue-500 text-white mx-3">
+                Translate
+              </button>
+              {/* copy button */}
+             <button className="w-8 h-8 bg-slate-200 flex items-center justify-center rounded-full " onClick={()=>handleSumCopy(article.summary)} > 
+             <img
+                  src={sumcopy === article.summary ? tick : copy}
+                  alt={sumcopy === article.summary ? "tick_icon" : "copy_icon"}
+                  className='w-[50%] h-[50%] object-contain'
+                />
+             </button>
+             {/* Whatsapp button */}
               <button className="w-9 h-9 " onClick={handleShareWhatsApp}>
                 <img src={whatsappIcon} alt="whatsapp_icon" />
               </button>
+             </div>
+             
               </div>
-              {/* Button to share summary to WhatsApp */}
+              
             </div>
           )
         )}
