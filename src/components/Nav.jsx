@@ -41,6 +41,15 @@ const Nav = () => {
         <img src='./SnapSum-logog.png' className='w-10 object-contain' />
         <span className="mx-5 font-bold text-2xl font-satoshi">SnapSum</span>
       </Link>
+      <div className='flex gap-2'>
+        <Link to="/" className="learn-more lm-btn">
+        <div className='flex items-center  '>
+          <span className="circle" aria-hidden="true">
+            <span className="icon arrow"></span>
+          </span>
+          <span className="button-text">Home</span>
+        </div>
+      </Link>
       {/* <div className='flex w-12' ref={translatorRef} > </div> */}
       <Link to="/knowmore" className="learn-more lm-btn">
         <div className='flex items-center '>
@@ -50,6 +59,7 @@ const Nav = () => {
           <span className="button-text">Learn More</span>
         </div>
       </Link>
+      </div>
     </div>
   );
 };

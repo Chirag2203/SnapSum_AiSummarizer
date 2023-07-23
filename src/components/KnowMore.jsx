@@ -1,15 +1,20 @@
 // KnowMore.jsx
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { motion } from "framer-motion"; 
+import { slideLeftAnimation } from './animation';
 
 const KnowMore = () => {
   return (
-    <>
+    <motion.div {...slideLeftAnimation}>
     < div className='flex flex-col items-center justify-center gap-5'>
     <span className='orange_gradient text-6xl font-black'>Snap Sum</span>
     
     {/* <span className='blue_gradient text-4xl font-black'>What is Snap Sum?</span> */}
-    <p className='text-2xl w-3/4 flex '>Snap Sum is a free tool that summarizes articles and Web pages for you. Save time and get the gist!</p>
+    <p className='text-2xl w-3/4 flex text-center '>Snap Sum is a free tool that summarizes articles and Web pages for you. Save time and get the gist! This app is built using React and RapidAPI </p>
+    
+
+
        
     <Link to = "/"><button class="cssbuttons-io-button mt-16 mb-32 px-12 flex">
         <p className='mr-3'>Home</p> 
@@ -22,7 +27,7 @@ const KnowMore = () => {
 
     </div>
     
-    </>
+    </motion.div>
   );
 };
 

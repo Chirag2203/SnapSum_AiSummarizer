@@ -1,8 +1,10 @@
 import React from "react";
+import {motion} from "framer-motion";
+import { fadeInAnimation} from "./animation";
 const Footer = () => {
   return (
     
-    <footer className="w-1/2 mt-32 bg-gradient-to-r from-sky-300 to-blue-500 bg-opacity-50 h-32 flex flex-col justify-center items-center rounded-lg ">
+    <motion.footer className="w-1/2 mt-32 bg-gradient-to-r from-sky-300 to-blue-500 bg-opacity-50 h-32 flex flex-col justify-center items-center rounded-lg " {...fadeInAnimation}>
         <div className="font-semibold text-lg font-satoshi">Connect With Us</div>
       <div class="social-links">
         <div id="twitter" class="social-btn flex-center">
@@ -41,7 +43,7 @@ const Footer = () => {
           <span >Chirag2203</span>
         </div>
       </div>
-    </footer>
+    </motion.footer>
   );
 };
 export default Footer;

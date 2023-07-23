@@ -4,6 +4,8 @@ import { copy, linkIcon, loader, tick } from "../assets";
 import { useLazyGetSummaryQuery } from "../services/article";
 import whatsappIcon from "../assets/whatsapp.png";
 import axios from 'axios';
+import {motion} from "framer-motion";
+import { fadeInAnimation, slideLeftAnimation, slideRightAnimation } from "./animation";
 
 const Demo = () => {
   const [article, setArticle] = useState({
@@ -186,7 +188,7 @@ const handleTranslation = async () => {
 
 
   return (
-    <>
+    <motion.div {...fadeInAnimation} >
     <section className='mt-16 w-full h-screen max-w-xl '>
       {/* Search */}
       <div className='flex flex-col w-full gap-2'>
@@ -250,7 +252,7 @@ const handleTranslation = async () => {
       </div>
 
       {/* Display Result */}
-      <div className='my-10 max-w-full flex justify-center items-center'>
+      <motion.div className='my-10 max-w-full flex justify-center items-center'{...slideLeftAnimation}>
         {isFetching ? (
           <img src={loader} alt='loader' className='w-20 h-20 object-contain' />
         ) : error ? (
@@ -352,9 +354,9 @@ const handleTranslation = async () => {
             </div>
           )
         )}
-      </div>
+      </motion.div>
     </section>
-    </>
+    </motion.div>
   );
 };
 
