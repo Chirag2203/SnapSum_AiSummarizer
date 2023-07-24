@@ -295,7 +295,7 @@ const speakText = (text) => {
         </div>
 
         {/* Display Result */}
-        <motion.div className="my-10 max-w-full flex items-center" {...slideLeftAnimation}>
+        <motion.div className="my-10 max-w-full flex items-center justify-center" {...slideLeftAnimation}>
           {isFetching ? (
             <img
               src={loader}
@@ -304,8 +304,7 @@ const speakText = (text) => {
             />
           ) : error ? (
             <p className="font-inter font-bold text-black text-center">
-              Translation has been paused due to major ongoing devlopment
-              {/* Sorry Could not process your request! PLease try again later */}
+              Translation has been paused due to major ongoing development. You can explore other Features till then.
               <br />
               <span className="font-satoshi font-normal text-gray-700">
                 {error?.data?.error}
