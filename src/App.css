@@ -5,6 +5,47 @@
 /* 
   Note: The styles for this gradient grid background is heavily inspired by the creator of this amazing site (https://dub.sh) – all credits go to them! 
 */
+.dark-mode{
+  background-color: #111;
+  /* color: white; */
+}
+.dark-mode.main:before{
+  background: linear-gradient(180deg, rgba(17,17,17,1) 0%, rgba(17,17,17,1) 100%);
+}
+.dark-mode .desc{
+  color: #e7e3e3;
+}
+.dark-mode .brand{
+  color: #e7e3e3;
+}
+.dark-mode .button-text{ 
+  color: #e7e3e3;
+  background-color: #438ff3;
+  border-radius: 1.625rem;
+  z-index: 0;
+}
+.hidden{
+  display: none;
+}
+.dark-mode .icon,
+/* .dark-mode .circle, */
+.dark-mode .arrow {
+  /* Apply the 'hidden' class when dark mode is active */
+  @apply hidden;
+}
+.dark-mode .lm-btn.learn-more .circle {
+  /* Apply a different border radius value when dark mode is active */
+  border-top-left-radius: 1.625rem;
+  border-bottom-left-radius: 1.625rem;
+  border-top-right-radius: 1.5rem;
+  border-bottom-right-radius: 1.5rem;
+  border: 2px solid #e7e3e3;
+}
+.dark-mode .head_text,.dark-mode .blue_gradient, .dark-mode .orange_gradient {
+  @apply bg-gradient-to-r from-orange-600 via-amber-400 to-orange-700 bg-clip-text text-transparent;
+}
+
+
 
 .main {
   width: 100vw;
@@ -17,7 +58,7 @@
 }
 
 .main:before {
-  background: radial-gradient(circle, rgba(2, 0, 36, 0) 0, #fafafa 100%);
+  /* background: radial-gradient(circle, rgba(2, 0, 36, 0) 0, #fafafa 100%); */
   position: absolute;
   content: "";
   z-index: 2;
@@ -49,11 +90,11 @@
       transparent 0%
     ),
     radial-gradient(at 97% 21%, rgb(114, 221, 254) 0px, transparent 70%),
-    radial-gradient(at 52% 99%, rgb(58, 253, 178) 0px, transparent 50%),
-    radial-gradient(at 10% 29%, hsla(256, 96%, 67%, 1) 0px, transparent 50%),
-    radial-gradient(at 97% 96%, hsla(38, 60%, 74%, 1) 0px, transparent 50%),
+    radial-gradient(at 52% 99%, rgb(58, 227, 253) 0px, transparent 50%),
+    radial-gradient(at 40% 29%, rgb(72, 8, 245) 0px, transparent 50%),
+    radial-gradient(at 97% 96%, hsla(38, 60%, 74%, 1) 0px, transparent 70%),
     radial-gradient(at 70% 50%, rgb(184, 24, 216) 0px, transparent 50%),
-    radial-gradient(at 79% 53%, rgb(206, 59, 101) 0px, transparent 70%);
+    radial-gradient(at 39% 43%, rgb(255, 79, 129) 0px, transparent 90%);
   position: absolute;
   content: "";
   width: 100%;
@@ -96,7 +137,7 @@
   border-top-left-radius: 10px;
   border-bottom-right-radius: 0px;
   border-bottom-left-radius: 10px;
-  @apply block w-full  border-gray-200 bg-white py-2.5 pl-10 pr-12 text-sm shadow-lg font-satoshi font-medium focus:border-black focus:outline-none focus:ring-0;
+  @apply block w-full  border-gray-200 bg-blue-50 py-2.5 pl-10 pr-12 text-sm shadow-lg font-satoshi font-medium focus:border-black focus:outline-none focus:ring-0;
 }
 
 .submit_btn {
@@ -117,4 +158,7 @@
 
 .summary_box {
   @apply rounded-xl border border-gray-200 bg-white/20 shadow-[inset_10px_-50px_94px_0_rgb(199,199,199,0.2)] backdrop-blur p-4;
+}
+.dark-mode .summary_box {
+  @apply bg-blue-50 text-blue-500;
 }

@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { copy, linkIcon, loader, tick } from "../assets";
 import { useLazyGetSummaryQuery } from "../services/article";
 import whatsappIcon from "../assets/whatsapp.png";
+import sound from "../assets/sound.png";
 import axios from "axios";
 import { motion } from "framer-motion";
 import {
@@ -170,6 +171,42 @@ const Demo = () => {
     }
   };
 
+
+
+
+// Function to speak the translated text
+const [isSpeaking, setIsSpeaking] = useState(false);
+const speakText = (text) => {
+ try{
+  const speechSynthesis = window.speechSynthesis;
+
+  //TTS is already speaking then stop it
+  if (isSpeaking) {
+    speechSynthesis.cancel();
+    setIsSpeaking(false);
+    return;
+  }
+
+  const utterance = new SpeechSynthesisUtterance(text);
+
+  
+  utterance.rate = 1; // Speech rate (0.1 to 10)
+  utterance.pitch = 1; // Speech pitch (0 to 2)
+
+  // Speak the text
+  speechSynthesis.speak(utterance);
+  setIsSpeaking(true);
+ }
+ catch(err){
+  alert("Sorry, your browser does not support text to speech");
+   console.log(err);
+ }
+};
+
+
+
+
+
   return (
     <motion.div {...fadeInAnimation}>
       <section className="mt-16 w-full h-screen max-w-xl ">
@@ -293,8 +330,9 @@ const Demo = () => {
                 </div>
 
 
-                <div className="flex gap-2 mt-3 items-center justify-end">
-                    {/* Display available languages drop down */}
+                <div className="flex  items-cneter justify-between summary_box ">
+                    <div className="flex gap-2 items-ceneter  ">
+                      {/* Display available languages drop down */}
                     <div className="flex justify-center items-center">
                       {/* <select
                   id="languages"
@@ -316,12 +354,12 @@ const Demo = () => {
                           >
                             {" "}
                           </label>
-                          <span className="font-semibold">Select Language</span>
+                          <span className="font-semibold font-satoshi">Select Language</span>
                           <select
                             id="languages"
                             value={selectedLanguage}
                             onChange={handleLanguageChange}
-                            className="w-32 bg-blue-500 border rounded-md mt-1 text-white p-1"
+                            className="w-32 bg-blue-500 border rounded-md  text-white p-1"
                           >
                             {languages.map((language) => (
                               <option
@@ -343,11 +381,20 @@ const Demo = () => {
                     </div>
                     <button
                       onClick={handleTranslation}
-                      className="py-1 px-2 border rounded-md bg-blue-500 text-white mx-3"
+                      className="py-1 px-2 border rounded-md bg-blue-500 text-white "
                     >
                       Translate
                     </button>
-                    {/* copy button */}
+                    </div>
+                    
+
+                    <div className="flex items-center gap-3">
+                      {/* copy button */}
+                      <button onClick={() => speakText(article.summary)}>
+                        <img src={sound} className="w-9 h-9" alt="" />
+                        {/* {isSpeaking ? 'Stop' : 'Listen '} */}
+                      </button>
+
                     <button
                       className="w-8 h-8 bg-slate-200 flex items-center justify-center rounded-full "
                       onClick={() => handleSumCopy(article.summary)}
@@ -366,6 +413,7 @@ const Demo = () => {
                     <button className="w-9 h-9 " onClick={handleShareWhatsApp}>
                       <img src={whatsappIcon} alt="whatsapp_icon" />
                     </button>
+                    </div>
                   </div>
               </div>
             )

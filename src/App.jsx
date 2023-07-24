@@ -8,9 +8,11 @@ import Footer from "./components/Footer";
 import KnowMore from "./components/KnowMore";
 import Nav from "./components/Nav";
 import "./App.css";
+import { ThemeProvider } from './components/ThemeContext';
 
 const App = () => {
   return (
+    <ThemeProvider>
     <Router>
       <main>
         <div className='main'>
@@ -29,6 +31,7 @@ const App = () => {
         </div>
       </main>
     </Router>
+    </ThemeProvider>
   );
 };
 
