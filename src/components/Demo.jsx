@@ -3,7 +3,8 @@ import React, { useState, useEffect } from "react";
 import { copy, linkIcon, loader, tick } from "../assets";
 import { useLazyGetSummaryQuery } from "../services/article";
 import whatsappIcon from "../assets/whatsapp.png";
-import sound from "../assets/sound.png";
+import sound from "../assets/sound.gif";
+import mute from "../assets/mute.gif";
 import axios from "axios";
 import { motion } from "framer-motion";
 import {
@@ -211,7 +212,7 @@ const speakText = (text) => {
     <motion.div {...fadeInAnimation}>
       <section className="mt-16 w-full h-screen max-w-xl ">
         {/* Search */}
-        <div className="flex flex-col w-full gap-2">
+        <div className="flex flex-col w-full gap-2 ">
           <form
             className="relative flex justify-center items-center"
             onSubmit={handleSubmit}
@@ -249,12 +250,12 @@ const speakText = (text) => {
           </form>
 
           {/* Browse History */}
-          <div className="flex flex-col gap-1 max-h-60 overflow-y-auto">
+          <div className="flex flex-col gap-1 max-h-60 overflow-y-auto ">
             {allArticles.reverse().map((item, index) => (
               <div
                 key={`link-${index}`}
                 onClick={() => setArticle(item)}
-                className="link_card flex "
+                className="link_card flex summary_box"
               >
                 <div className="copy_btn" onClick={() => handleCopy(item.url)}>
                   <img
@@ -391,7 +392,7 @@ const speakText = (text) => {
                     <div className="flex items-center gap-3">
                       {/* copy button */}
                       <button onClick={() => speakText(article.summary)}>
-                        <img src={sound} className="w-9 h-9" alt="" />
+                        <img  src={isSpeaking ? mute : sound} className="w-9 h-9 speaker mix-blend-multiply  " alt=""  />
                         {/* {isSpeaking ? 'Stop' : 'Listen '} */}
                       </button>
 

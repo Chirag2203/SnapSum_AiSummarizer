@@ -4,12 +4,12 @@ import DarkModeSwitch from './DarkModeSwitch';
 
 const Nav = () => {
   return (
-    <div className='flex flex-col justify-center items-center md:flex-row md:justify-between md:items-center w-full mb-10 pt-3'>
+    <div className='flex flex-col justify-center items-center md:flex-row md:justify-between md:items-center w-full mb-10 pt-3 mt-5'>
       <Link to="/" className='flex justify-center items-center md:items-start'>
         <img src='./SnapSum-logog.png' className='w-10 object-contain' />
         <span className="mx-5 font-bold text-2xl font-satoshi brand">SnapSum</span>
       </Link>
-      <div className='flex gap-2 mt-4 md:mt-0'>
+      <div className='flex md:gap-2  gap-1 items-center mt-0 flex-col md:flex-row'>
         <Link to="/" className="learn-more lm-btn">
           <div className='flex items-center'>
             <span className="circle outer-circle" aria-hidden="true">
@@ -26,7 +26,7 @@ const Nav = () => {
             <span className="button-text">Learn More</span>
           </div>
         </Link>
-        <DarkModeSwitch />
+      <DarkModeSwitch />
       </div>
     </div>
   );
