@@ -106,7 +106,7 @@ const KnowMore = () => {
         </motion.div>
         <motion.div className='summary_box flex items-center gap-3 justify-center flex-col w-auto md:w-96 mb-3' {...fadeInAnimation}>
           <button className='joke-btn' onClick={fetchFact}>
-           EXTREAM Bored ?
+           EXTREMe Bored ?
           </button>
           <span className='text-center'>Enter a number to get a fact about it</span>
           <input
