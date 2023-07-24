@@ -4,7 +4,7 @@ import { fadeInAnimation} from "./animation";
 const Footer = () => {
   return (
     
-    <motion.footer className="w-1/2 mt-32 bg-gradient-to-r from-sky-300 to-blue-500 bg-opacity-50 h-32 flex flex-col justify-center items-center rounded-lg " {...fadeInAnimation}>
+    <motion.footer className="w-1/2 md:mt-0  mt-32 bg-gradient-to-r from-sky-300 to-blue-500 bg-opacity-50 h-32 flex flex-col justify-center items-center rounded-lg " {...fadeInAnimation}>
         <div className="font-semibold text-lg font-satoshi">Connect With Us</div>
       <div class="social-links">
         <div id="twitter" class="social-btn flex-center">
@@ -19,7 +19,7 @@ const Footer = () => {
           <span>@Chirag2203</span>
         </div>
 
-        <div id="linkedin" class="social-btn flex-center">
+        <div id="linkedin" class="social-btn flex-center md:m-0">
           <svg
             viewBox="0 0 24 24"
             height="24"

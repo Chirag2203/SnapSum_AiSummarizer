@@ -7,7 +7,7 @@ import { slideRightAnimation } from "./animation";
 
 const Hero = () => {
   return (
-    <motion.div {...slideRightAnimation} className="flex flex-col items-center">
+    <motion.div {...slideRightAnimation} className="flex flex-col items-center h-screen">
     
     <header className='w-full flex justify-center items-center flex-col '>
 

@@ -6,12 +6,12 @@ import { slideLeftAnimation } from './animation';
 
 const KnowMore = () => {
   return (
-    <motion.div {...slideLeftAnimation}>
+    <motion.div {...slideLeftAnimation} className='h-screen'>
     < div className='flex flex-col items-center justify-center gap-5'>
     <span className='orange_gradient text-6xl font-black'>Snap Sum</span>
     
     {/* <span className='blue_gradient text-4xl font-black'>What is Snap Sum?</span> */}
-    <p className='text-2xl w-3/4 flex text-center brand'>Snap Sum is a free tool that summarizes articles and Web pages for you. Save time and get the gist! This app is built using React and RapidAPI </p>
+    <p className='text-2xl w-3/4 flex text-center brand '>Snap Sum is a free tool that summarizes articles and Web pages for you. Save time and get the gist! This app is built using React and RapidAPI </p>
     
 
 

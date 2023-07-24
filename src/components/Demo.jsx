@@ -415,6 +415,9 @@ const speakText = (text) => {
                     </button>
                     </div>
                   </div>
+                  <div id="translation-box" className="summary_box">
+                          
+                  </div>
               </div>
             )
           )}

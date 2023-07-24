@@ -89,12 +89,14 @@
       hsla(215, 98%, 61%, 1) 0px,
       transparent 0%
     ),
-    radial-gradient(at 97% 21%, rgb(114, 221, 254) 0px, transparent 70%),
-    radial-gradient(at 52% 99%, rgb(58, 227, 253) 0px, transparent 50%),
-    radial-gradient(at 40% 29%, rgb(72, 8, 245) 0px, transparent 50%),
-    radial-gradient(at 97% 96%, hsla(38, 60%, 74%, 1) 0px, transparent 70%),
-    radial-gradient(at 70% 50%, rgb(184, 24, 216) 0px, transparent 50%),
-    radial-gradient(at 39% 43%, rgb(255, 79, 129) 0px, transparent 90%);
+    radial-gradient(at 97% 21%, rgb(252, 114, 254) 0px, transparent 70%),
+    radial-gradient(at 52% 99%, rgb(58, 227, 253) 0px, transparent 90%),
+    radial-gradient(at 10% 10%, rgb(245, 115, 8) 0px 90%),
+    radial-gradient(at 10% 30%, rgb(245, 115, 8) 0px, transparent 90%),
+    radial-gradient(at 97% 96%, hsla(38, 60%, 74%, 1) 0px, transparent 90%),
+    radial-gradient(at 70% 80%, rgb(184, 24, 216) 0px, transparent 90%),
+    radial-gradient(at 39% 43%, rgb(255, 79, 129) 0px, transparent 90%),
+    radial-gradient(at 10% 90%, rgb(255, 79, 129) 0px, transparent 90%);
   position: absolute;
   content: "";
   width: 100%;
