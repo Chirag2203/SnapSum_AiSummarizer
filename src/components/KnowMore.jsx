@@ -98,7 +98,7 @@ const KnowMore = () => {
         </p>
 
         <Link to='/'>
-          <button className='cssbuttons-io-button mt-16 mb-16 px-12 flex'>
+          <button className='cssbuttons-io-button mt-5 sm:mt-16 mb-16 px-12 flex'>
             <p className='mr-3'>Home</p>
             <div className='icon2'>
               <svg height='24' width='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
@@ -111,7 +111,7 @@ const KnowMore = () => {
             </div>
           </button>
         </Link>
-        <div className='flex md:flex-row flex-col gap-3 items-start  justify-center'>
+        <div className='flex  md:flex-row flex-col gap-3 items-start  justify-center '>
         <motion.div className='summary_box flex items-center justify-center flex-col w-full md:w-96'{...fadeInAnimation}>
           <button className='joke-btn' onClick={fetchJoke}>
            
@@ -128,13 +128,13 @@ const KnowMore = () => {
            Get me Facts
           </button>
           
-          <div id='fact-here ' className='mt-3 text-center text-indigo-900 p-2 rounded-lg'>
+          <div id='fact-here ' className='mt-3 text-center text-indigo-900 p-2 rounded-lg '>
             {/* Conditionally render the loader when loadingFact is true */}
             {loadingFact ? <div className='loader2'></div> : null}
             {/* Render the fact only when not loadingFact */}
             {!loadingFact && (
               <>
-                <span className='text-center'>Enter a number to get a fact about it</span>
+                <span className='text-center'>Enter a number to get a fact about it <br /></span>
                 <input
                   type='number'
                   value={number}
