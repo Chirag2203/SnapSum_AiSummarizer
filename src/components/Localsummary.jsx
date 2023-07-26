@@ -73,7 +73,7 @@ const Localsummary = () => {
 
 
   return (
-    <motion.div className="w-1/2 h-screen " {...fadeInAnimation}>
+    <motion.div className="w-full h-screen " {...fadeInAnimation}>
       <span className="text-center block blue_gradient font-poppins text-3xl p-3">
         Summarize Any Text
       </span>
@@ -94,14 +94,14 @@ const Localsummary = () => {
         <input
           type="number"
           id="summary-size"
-          className=" md:w-auto w-1/2 bg-blue-500 border-none rounded-md  hover:bg-blue-600 text-sm text-center placeholder-blue-100 italic text-white"
+          className=" sm:w-auto w-1/3 bg-blue-500 border-none rounded-md  hover:bg-blue-600 text-sm text-center placeholder-blue-100 italic text-white"
           placeholder="Size (10-100)"
           onChange={handleSummarySize}
           required
         />
         <button
           id="sum-text-btn"
-          className="bg-blue-500 hover:bg-blue-600 text-white p-1 px-2  rounded-lg w-1/2 h-auto md:w-auto"
+          className="bg-blue-500 hover:bg-blue-600 text-white p-1 px-2  rounded-lg w-1/2 h-auto sm:w-auto"
           onClick={handleSummarizeClick}
         >
           Summarize this

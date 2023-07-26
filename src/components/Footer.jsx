@@ -4,10 +4,10 @@ import { fadeInAnimation} from "./animation";
 const Footer = () => {
   return (
     
-    <motion.footer className="w-1/2 md:mt-  mt-16 bg-gradient-to-r from-sky-300 to-blue-500 bg-opacity-50 h-32 flex flex-col justify-center items-center rounded-lg " {...fadeInAnimation}>
-        <div className="font-semibold text-lg font-satoshi">Connect With Us</div>
-      <div class="social-links">
-        <div id="twitter" class="social-btn flex-center">
+    <motion.footer className=" w-full  md:mt-16  mt-32   bg-slate-600 orange_gradient bg-opacity-50 h-32 flex flex-col justify-center items-center rounded-lg p-2 mb-5" {...fadeInAnimation}>
+        <div className="font-semibold text-lg md:text-xl font-satoshi">Connect With Us</div>
+      <div class="social-links sm:mt-2">
+        <div id="twitter" class="social-btn flex-center w-10 h-10 sm:w-12 sm:h-12">
           <svg
             viewBox="0 0 24 24"
             height="24"
@@ -19,7 +19,7 @@ const Footer = () => {
           <span>@Chirag2203</span>
         </div>
 
-        <div id="linkedin" class="social-btn flex-center md:m-0">
+        <div id="linkedin" class="social-btn flex-center md:m-0 w-10 h-10 sm:w-12 sm:h-12">
           <svg
             viewBox="0 0 24 24"
             height="24"
@@ -31,7 +31,7 @@ const Footer = () => {
           <span>in/cr2203</span>
         </div>
 
-        <div id="github" class="social-btn flex-center">
+        <div id="github" class="social-btn flex-center w-10 h-10 sm:w-12 sm:h-12">
           <svg
             viewBox="0 0 24 24"
             height="24"
@@ -42,7 +42,9 @@ const Footer = () => {
           </svg>
           <span >Chirag2203</span>
         </div>
+
       </div>
+      <span>Developed by &#9889;Chirag Rajput</span>
     </motion.footer>
   );
 };

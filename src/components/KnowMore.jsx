@@ -87,12 +87,12 @@ const KnowMore = () => {
 // }, []);
 
   return (
-    <motion.div {...slideLeftAnimation} className='h-screen m-16'>
+    <motion.div {...slideLeftAnimation} className='h-screen m-16 w-full'>
       <div className='flex flex-col items-center justify-center gap-5'>
-        <span className='orange_gradient text-6xl font-black'>Snap Sum</span>
+        <span className='orange_gradient text-4xl md:text-6xl font-black'>Snap Sum</span>
 
         {/* <span className='blue_gradient text-4xl font-black'>What is Snap Sum?</span> */}
-        <p className='text-2xl w-3/4 flex text-center brand '>
+        <p className='text-xl sm:text-2xl w-3/4 flex text-center brand  '>
           Snap Sum is a free tool that summarizes articles and Web pages for you. Save time and get the gist! This app
           is built using React and RapidAPI
         </p>
@@ -112,7 +112,7 @@ const KnowMore = () => {
           </button>
         </Link>
         <div className='flex md:flex-row flex-col gap-3 items-start  justify-center'>
-        <motion.div className='summary_box flex items-center justify-center flex-col w-auto md:w-96'{...fadeInAnimation}>
+        <motion.div className='summary_box flex items-center justify-center flex-col w-full md:w-96'{...fadeInAnimation}>
           <button className='joke-btn' onClick={fetchJoke}>
            
             Make me Laugh
@@ -123,7 +123,7 @@ const KnowMore = () => {
             {!loadingJoke && <div id='joke-here ' className='mt-3 text-center text-indigo-900 '>{joke}</div>}
             
         </motion.div>
-        <motion.div className='summary_box flex items-center gap-3 justify-center flex-col w-auto md:w-96 mb-3' {...fadeInAnimation}>
+        <motion.div className='summary_box flex items-center gap-3 justify-center flex-col w-full md:w-96 mb-3' {...fadeInAnimation}>
           <button className='joke-btn' onClick={fetchFact}>
            Get me Facts
           </button>

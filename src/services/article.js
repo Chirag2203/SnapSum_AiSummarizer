@@ -7,11 +7,12 @@ export const articleApi = createApi({
     baseQuery: fetchBaseQuery({
         baseUrl: 'https://article-extractor-and-summarizer.p.rapidapi.com/',
         prepareHeaders: (headers) => {
-            headers.set('X-RapidAPI-Key', '6d90c4ceefmsh2a38b0206a4488ep141773jsn534665224174');
+            headers.set('X-RapidAPI-Key', 'edd45db06bmsh69c35dcdc4819b6p1cb005jsnce5dacd04037');
             headers.set('X-RapidAPI-Host', 'article-extractor-and-summarizer.p.rapidapi.com');
-            // api key 6d90c4ceefmsh2a38b0206a4488ep141773jsn534665224174
+            // api key1 6d90c4ceefmsh2a38b0206a4488ep141773jsn534665224174
+            //api key2 edd45db06bmsh69c35dcdc4819b6p1cb005jsnce5dacd04037
             return headers;
-        },
+        },  
     }),
     endpoints: (builder) => ({
         getSummary: builder.query({
