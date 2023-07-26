@@ -12,20 +12,10 @@ const Nav = () => {
       </Link>
       <div className='flex sm:gap-2  gap-1 items-center mt-3 sm:mt-0 flex-row ' >
         <Link to="/" className="learn-more lm-btn hidden sm:block">
-          <div className='flex items-center '>
-            <span className="circle outer-circle" aria-hidden="true">
-              <span className="icon arrow"></span>
-            </span>
-            <span className="button-text">Home</span>
-          </div>
+          <button className='nav-btn'>Home</button>
         </Link>
         <Link to="/about" className="learn-more lm-btn">
-          <div className='flex items-center'>
-            <span className="circle" aria-hidden="true">
-              <span className="icon arrow"></span>
-            </span>
-            <span className="button-text">About us</span>
-          </div>
+          <button className='nav-btn'>About us</button>
         </Link>
       <DarkModeSwitch />
       </div>

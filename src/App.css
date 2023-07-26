@@ -33,18 +33,13 @@
   /* Apply the 'hidden' class when dark mode is active */
   @apply hidden;
 }
-.dark-mode .lm-btn.learn-more .circle {
-  /* Apply a different border radius value when dark mode is active */
-  border-top-left-radius: 1.625rem;
-  border-bottom-left-radius: 1.625rem;
-  border-top-right-radius: 1.5rem;
-  border-bottom-right-radius: 1.5rem;
-  border: 2px solid #e7e3e3;
-}
+
 .dark-mode .head_text,.dark-mode .blue_gradient, .dark-mode .orange_gradient {
   @apply bg-gradient-to-r from-orange-600 via-amber-400 to-orange-700 bg-clip-text text-transparent;
 }
-
+.dark-mode .cls1,.dark-mode.cls2{
+  @apply hidden;
+}
 
 
 .main {
