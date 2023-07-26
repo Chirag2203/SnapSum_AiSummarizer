@@ -7,6 +7,7 @@ import Demo from "./components/Demo";
 import Footer from "./components/Footer";
 import KnowMore from "./components/KnowMore";
 import Nav from "./components/Nav";
+import Localsummary from './components/Localsummary';
 import "./App.css";
 import { ThemeProvider } from './components/ThemeContext';
 
@@ -24,8 +25,9 @@ const App = () => {
           
             <Routes>
               <Route path="/" element={<Hero />} />
-              <Route path="/knowmore" element={<KnowMore />} />
+              <Route path="/about" element={<KnowMore />} />
               <Route path="/demo" element={<Demo />} />
+              <Route path="/localsummary" element={<Localsummary />} />
             </Routes>
           <Footer />
         </div>

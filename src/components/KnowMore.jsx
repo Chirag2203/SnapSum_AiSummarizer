@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { fadeInAnimation, slideLeftAnimation } from './animation';
@@ -6,7 +6,7 @@ import axios from 'axios';
 
 const KnowMore = () => {
   const [joke, setJoke] = useState('');
-
+  const [loadingJoke, setLoadingJoke] = useState(false);
   const fetchJoke = async () => {
     const options = {
       method: 'GET',
@@ -21,7 +21,7 @@ const KnowMore = () => {
         'X-RapidAPI-Host': 'jokeapi-v2.p.rapidapi.com',
       },
     };
-
+    setLoadingJoke(true);
     try {
       const response = await axios.request(options);
       if (response.data.type === 'single') {
@@ -32,16 +32,24 @@ const KnowMore = () => {
         setJoke('Humor died :( Come when he reborns');
         console.log(error);
       }
+      setLoadingJoke(false);
     } catch (error) {
       console.error(error);
+      setLoadingJoke(false);
     }
   };
+  //will cause immedite re-render as the dependency array is empty
+//   useEffect(() => {
+//   fetchJoke();
+// }, []);
+
 
 
   
 
   const [number, setNumber] = useState('');
   const [fact, setFact] = useState('');
+  const [loadingFact, setLoadingFact] = useState(false);
 
   const fetchFact = async () => {
     if (!number) {
@@ -61,15 +69,22 @@ const KnowMore = () => {
         'X-RapidAPI-Host': 'numbersapi.p.rapidapi.com',
       },
     };
-
+    setLoadingFact(true);
     try {
       const response = await axios.request(options);
       setFact(response.data.text);
+      setLoadingFact(false);
     } catch (error) {
       console.error(error);
       setFact('Failed to fetch the fact. Please try again later.');
+      setLoadingFact(false);
     }
   };
+  //will cause immedite re-render as the dependency array is empty
+//   useEffect(() => {
+  
+//   fetchFact();
+// }, []);
 
   return (
     <motion.div {...slideLeftAnimation} className='h-screen m-16'>
@@ -100,23 +115,37 @@ const KnowMore = () => {
         <motion.div className='summary_box flex items-center justify-center flex-col w-auto md:w-96'{...fadeInAnimation}>
           <button className='joke-btn' onClick={fetchJoke}>
            
-            Bored?
+            Make me Laugh
           </button>
-          <div id='joke-here ' className='mt-3 text-center text-indigo-900 '>{joke}</div>
+          {/* Conditionally render the loader when loadingJoke is true */}
+          {loadingJoke ? <div className='loader2 mt-4'></div> : null}
+            {/* Render the joke only when not loadingJoke */}
+            {!loadingJoke && <div id='joke-here ' className='mt-3 text-center text-indigo-900 '>{joke}</div>}
+            
         </motion.div>
         <motion.div className='summary_box flex items-center gap-3 justify-center flex-col w-auto md:w-96 mb-3' {...fadeInAnimation}>
           <button className='joke-btn' onClick={fetchFact}>
-           EXTREMe Bored ?
+           Get me Facts
           </button>
-          <span className='text-center'>Enter a number to get a fact about it</span>
-          <input
-            type='number'
-            value={number}
-            className='rounded-lg text-center'
-            onChange={(e) => setNumber(e.target.value)}
-          />
+          
           <div id='fact-here ' className='mt-3 text-center text-indigo-900 p-2 rounded-lg'>
-            {fact }
+            {/* Conditionally render the loader when loadingFact is true */}
+            {loadingFact ? <div className='loader2'></div> : null}
+            {/* Render the fact only when not loadingFact */}
+            {!loadingFact && (
+              <>
+                <span className='text-center'>Enter a number to get a fact about it</span>
+                <input
+                  type='number'
+                  value={number}
+                  className='rounded-lg text-center'
+                  onChange={(e) => setNumber(e.target.value)}
+                />
+                <div id='fact-here ' className='mt-3 text-center text-indigo-900 p-2 rounded-lg'>
+                  {fact}
+                </div>
+              </>
+            )}
           </div>
         </motion.div>
         </div>

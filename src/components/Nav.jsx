@@ -18,12 +18,12 @@ const Nav = () => {
             <span className="button-text">Home</span>
           </div>
         </Link>
-        <Link to="/knowmore" className="learn-more lm-btn">
+        <Link to="/about" className="learn-more lm-btn">
           <div className='flex items-center'>
             <span className="circle" aria-hidden="true">
               <span className="icon arrow"></span>
             </span>
-            <span className="button-text">Learn More</span>
+            <span className="button-text">About us</span>
           </div>
         </Link>
       <DarkModeSwitch />

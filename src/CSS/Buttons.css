@@ -528,3 +528,7 @@
    .joke-btn:active {
     box-shadow: none;
    }
+   .input-box{
+    overflow-y: scroll;
+    overflow-x: scroll;
+   }
