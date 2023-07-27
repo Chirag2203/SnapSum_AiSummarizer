@@ -73,7 +73,7 @@ const Localsummary = () => {
 
 
   return (
-    <motion.div className="w-full h-screen " {...fadeInAnimation}>
+    <motion.div className="w-full h-screen  sm:w-2/3" {...fadeInAnimation}>
       <span className="text-center block blue_gradient font-poppins text-3xl p-3">
         Summarize Any Text
       </span>
@@ -111,11 +111,11 @@ const Localsummary = () => {
         <div className="loader2 flex justify-center ml-64 mt-16"></div>
       ) : Lsummary ? (
         <motion.div {...fadeInAnimation}>
-          <h2 className="font-satoshi font-bold text-gray-600 text-xl">
+          <h2 className="font-satoshi font-bold text-gray-600 text-xl mt-3">
             Text <span className="blue_gradient">Summary</span>
           </h2>
           <div
-            className="summary_box w-full mb-3 flex items-center justify-center"
+            className="summary_box w-full mb-3 flex items-center justify-center "
             id="sum-result"
           >
             {/* Rendering the summary here */}
@@ -126,12 +126,12 @@ const Localsummary = () => {
       ) : (
         <>
           {apiAttempted && !loading && !Lsummary && (
-            <motion.divc{...fadeInAnimation}>
+            <motion.div {...fadeInAnimation}>
               <div className="summary_box text-slate-500 mt-3">
                 No summary found. Make sure you have select correct size and
                 text.
               </div>
-            </motion.divc>
+            </motion.div>
           )}
         </>
       )}

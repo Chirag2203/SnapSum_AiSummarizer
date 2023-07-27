@@ -76,7 +76,7 @@ const Demo = () => {
 
   return (
     <motion.div {...fadeInAnimation} className="w-full">
-      <section className="mt-16  h-screen w-full md:w-xl flex justify-center  ">
+      <section className="mt-16  flex-col items-center h-screen w-full md:w-xl flex justify-center  ">
         {/* Search */}
         <div className="flex flex-col  gap-2 w-full sm:w-2/3">
           <form
@@ -116,7 +116,7 @@ const Demo = () => {
           </form>
 
           {/* Browse History */}
-          <div className="flex flex-col gap-1 max-h-60 overflow-y-auto ">
+          <div className="flex flex-col gap-1 max-h-60 overflow-y-auto w-full ">
             {allArticles.reverse().map((item, index) => (
               <div
                 key={`link-${index}`}
@@ -161,7 +161,7 @@ const Demo = () => {
         </div>
 
         {/* Display Result */}
-        <motion.div className="my-10 max-w-full flex items-center justify-center" {...slideLeftAnimation}>
+        <motion.div className="my-10 flex items-center justify-center w-full sm:w-2/3" {...slideLeftAnimation}>
           {isFetching ? (
             <img
               src={loader}

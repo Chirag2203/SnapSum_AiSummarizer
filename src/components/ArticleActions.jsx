@@ -186,14 +186,14 @@ const ArticleActions = ({
   return (
     <>
     <motion.div
-      className="flex items-center justify-between summary_box w-full flex-col lg:flex-row gap-3 lg:gap-0 "
+      className="flex items-center justify-between summary_box w-full flex-col md:flex-row gap-3 lg:gap-0 "
       {...fadeInAnimation}
     >
       <div className="flex  items-center md:gap-2">
         {/* Display available languages drop down */}
         <div className="flex justify-center items-center ">
           {languages.length > 0 ? ( // Conditionally render the select element when languages are available
-            <div className="flex items-center justify-center gap-2">
+            <div className="flex items-center justify-between gap-2 w-full">
               <label
                 htmlFor="languages"
                 className="font-satoshi font-bold text-gray-600"
