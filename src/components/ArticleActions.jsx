@@ -6,10 +6,12 @@ import sound from "../assets/sound.gif";
 import mute from "../assets/mute.gif";
 import axios from "axios";
 import { copy, tick } from "../assets";
+import PDFDownloadButton from "./PDFDownloadButton";
 const ArticleActions = ({
   articleSummary,
 }) => {
 
+  const [initialSummary, setInitialSummary] = useState(articleSummary);
   const [translatedSummary, setTranslatedSummary] = useState("Translated summary will appear here.");
   const [languages, setLanguages] = useState([]);
   const [selectedLanguage, setSelectedLanguage] = useState("en");
@@ -100,87 +102,38 @@ const ArticleActions = ({
   
 
   // // Function to handle translation
-
-  const handleTranslation = async () => {
-    // let texTosum= text(article.summary);
+   // Function to handle translation
+   const handleTranslation = async () => {
     const encodedParams = new URLSearchParams();
     encodedParams.set("source_language", "en");
-    encodedParams.set("target_language", "fr");
-    encodedParams.set("text", articleSummary);
+    encodedParams.set("target_language", selectedLanguage);
+    encodedParams.set("text", initialSummary);
 
     const options = {
       method: "POST",
       url: "https://text-translator2.p.rapidapi.com/translate",
       headers: {
         "content-type": "application/x-www-form-urlencoded",
-        "X-RapidAPI-Key": "6d90c4ceefmsh2a38b0206a4488ep141773jsn534665224174",
+        "X-RapidAPI-Key": "edd45db06bmsh69c35dcdc4819b6p1cb005jsnce5dacd04037",
         "X-RapidAPI-Host": "text-translator2.p.rapidapi.com",
       },
       data: encodedParams,
     };
+    console.log("Translating summary...");
+    console.log("Translation options:", options);
+    console.log(initialSummary)
+    console.log(selectedLanguage)
 
-    const translateResponse = await axios.request(options);
     try {
-      // if (translateResponse && translateResponse.data && translateResponse.data.translations)
-      {
-        // Update the summary in the state with the translated text
-        const translatedText = translateResponse.data.translations.text;
-
-        setArticle((prevArticle) => ({
-          ...prevArticle,
-          summary: translatedText, // Update the 'summary' property with the translated text
-        }));
-      }
-      // else {
-      console.log(translateResponse);
-      console.error("Translation response is missing or invalid.");
-      // }
+      const response = await axios.request(options);
+      const translatedText = response.data.translatedText;
+      setTranslatedSummary(translatedText);
     } catch (error) {
-      alert("Sorry, something went wrong. Please try again later.");
-      console.error("Translation Error:", error);
-      console.error("Response Data:", error?.response?.data); // Log the response data for additional information
-      console.error("Request Config:", error?.config); // Log the request config for debugging
+      console.error("Error translating summary:", error);
+      console.log("Error response:", error.response);
+      setTranslatedSummary("Error occurred while translating the summary.");
     }
   };
-
-
-    // Function to handle translation
-    // const handleTranslation = async () => {
-    //   // const requestData = {
-    //   //   text: articleSummary,
-    //   //   target: selectedLanguage,
-    //   // };
-  
-    //   const options = {
-    //     method: "POST",
-    //     url: "https://opentranslator.p.rapidapi.com/translate",
-    //     headers: {
-    //       "content-type": "application/json",
-    //       "X-RapidAPI-Key": "6d90c4ceefmsh2a38b0206a4488ep141773jsn534665224174",
-    //       "X-RapidAPI-Host": "opentranslator.p.rapidapi.com",
-    //     },
-    //     data: {text:'hello how are you',
-    //           target: 'hi',
-    //     }
-    //   };
-  
-    //   try {
-    //     const response = await axios.request(options);
-    //     console.log(response.data);
-  
-    //     // if (response.data && response.data.text) {
-    //       // Update the summary in the state with the translated text
-    //       // setTranslatedSummary(response.data.text);
-    //       console.log(response.data.text);
-    //     // } else {
-    //     //   console.error("Translation response is missing or invalid.");
-    //     // }
-    //   } catch (error) {
-    //     console.error("Translation Error:", error);
-    //     console.error("Response Data:", error?.response?.data);
-    //     console.error("Request Config:", error?.config);
-    //   }
-    // };
 
 
   return (
@@ -245,7 +198,7 @@ const ArticleActions = ({
             alt=""
           />
         </button>
-
+        
         {/* Copy button */}
         <button
           className="w-8 h-8 bg-slate-200 flex items-center justify-center rounded-full"
@@ -257,7 +210,7 @@ const ArticleActions = ({
             className="w-[50%] h-[50%] object-contain"
           />
         </button>
-
+            <PDFDownloadButton summary={articleSummary} />
         {/* WhatsApp button */}
         <button className="w-9 h-9" onClick={handleShareWhatsApp}>
           <img src={whatsappIcon} alt="whatsapp_icon" />

@@ -87,7 +87,7 @@ const KnowMore = () => {
 // }, []);
 
   return (
-    <motion.div {...slideLeftAnimation} className='h-screen m-16 w-full'>
+    <motion.div {...slideLeftAnimation} className='h-screen z-10 m-16 w-full'>
       <div className='flex flex-col items-center justify-center gap-5'>
         <span className='orange_gradient text-4xl md:text-6xl font-black'>Snap Sum</span>
 

@@ -4,7 +4,7 @@ import { fadeInAnimation} from "./animation";
 const Footer = () => {
   return (
     
-    <motion.footer className=" w-full  md:mt-16  mt-32   bg-slate-600 orange_gradient bg-opacity-50 h-32 flex flex-col justify-center items-center rounded-lg p-2 mb-5" {...fadeInAnimation}>
+    <motion.footer className="h- w-full z-10  md:mt-16  mt-32   bg-slate-600 orange_gradient bg-opacity-50 h-96 bottom-0 flex flex-col justify-center items-center rounded-lg p-2 mb-5" {...fadeInAnimation}>
         <div className="font-semibold text-lg md:text-xl font-satoshi">Connect With Us</div>
       <div class="social-links sm:mt-2">
         <div id="twitter" class="social-btn flex-center w-10 h-10 sm:w-12 sm:h-12">

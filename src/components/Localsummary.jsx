@@ -3,6 +3,8 @@ import axios from "axios";
 import ArticleActions from "./ArticleActions";
 import { motion } from "framer-motion";
 import { fadeInAnimation, fadeOutAnimation, slideLeftAnimation } from "./animation";
+import PDFDownloadButton from './PDFDownloadButton'; 
+
 
 const Localsummary = () => {
   const [textInput, setTextInput] = useState("");
@@ -121,6 +123,7 @@ const Localsummary = () => {
             {/* Rendering the summary here */}
             {Lsummary}
           </div>
+           {/* Pass the userSummary to the PDFDownloadButton */}
           <ArticleActions articleSummary={Lsummary} />
         </motion.div>
       ) : (
