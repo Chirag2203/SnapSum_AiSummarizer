@@ -124,7 +124,10 @@ const Localsummary = () => {
             {Lsummary}
           </div>
            {/* Pass the userSummary to the PDFDownloadButton */}
-          <ArticleActions articleSummary={Lsummary} />
+          <ArticleActions 
+          articleSummary={Lsummary}
+          link={null} 
+          />
         </motion.div>
       ) : (
         <>

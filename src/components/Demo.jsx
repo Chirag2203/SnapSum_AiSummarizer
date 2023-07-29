@@ -198,6 +198,7 @@ const Demo = () => {
                 </div>
                 <ArticleActions
                   articleSummary={article.summary}
+                  link={article.url}
                 />
                   
               </div>

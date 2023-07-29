@@ -7,9 +7,7 @@ import mute from "../assets/mute.gif";
 import axios from "axios";
 import { copy, tick } from "../assets";
 import PDFDownloadButton from "./PDFDownloadButton";
-const ArticleActions = ({
-  articleSummary,
-}) => {
+const ArticleActions = ({articleSummary,link}) => {
 
   const [initialSummary, setInitialSummary] = useState(articleSummary);
   const [translatedSummary, setTranslatedSummary] = useState("Translated summary will appear here.");
@@ -210,7 +208,7 @@ const ArticleActions = ({
             className="w-[50%] h-[50%] object-contain"
           />
         </button>
-            <PDFDownloadButton summary={articleSummary} />
+            <PDFDownloadButton summary={articleSummary} link={link} />
         {/* WhatsApp button */}
         <button className="w-9 h-9" onClick={handleShareWhatsApp}>
           <img src={whatsappIcon} alt="whatsapp_icon" />
