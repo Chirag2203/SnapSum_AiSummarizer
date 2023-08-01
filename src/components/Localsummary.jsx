@@ -83,14 +83,15 @@ const Localsummary = () => {
         Paste your text below and select Summary size
       </span>
       {/* text input  */}
-      <input
+      <textarea
+        placeholder="paste your text here"
         type="textarea"
-        className="summary_box w-full h-32 input-box mb-3 resize-vertical  overflow-y-scroll  outline-none  border-blue-800 focus:border-blue-500 hover:border-amber-400 ease"
+        className="summary_box w-full h-32 input-box mb-3 overflow-hidden resize-vertical flex flex-row items-start justify-start outline-none  border-blue-800 focus:border-blue-500 hover:border-amber-400 ease"
         name=""
         id=""
         value={textInput}
         onChange={handleInputChange}
-      />
+      ></textarea>
       <div className="flex justify-end gap-3">
         {/* summary size input box */}
         <input

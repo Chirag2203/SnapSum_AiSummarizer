@@ -76,9 +76,9 @@ const Demo = () => {
 
   return (
     <motion.div {...fadeInAnimation} className="w-full">
-      <section className="mt-16  flex-col items-center h-screen w-full md:w-xl flex justify-center  ">
+      <section className="mt-16  flex-col items-center h-fit w-full md:w-xl flex justify-center  ">
         {/* Search */}
-        <div className="flex flex-col  gap-2 w-full sm:w-2/3">
+        <div className="flex flex-col  gap-2 w-full sm:w-2/3 align-middle ">
           <form
             className="relative flex justify-center items-center"
             onSubmit={handleSubmit}

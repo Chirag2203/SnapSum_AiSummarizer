@@ -9,7 +9,9 @@ import { copy, tick } from "../assets";
 import PDFDownloadButton from "./PDFDownloadButton";
 const ArticleActions = ({articleSummary,link}) => {
 
-  const [initialSummary, setInitialSummary] = useState(articleSummary);
+  const [initialSummary, setInitialSummary] = useState("");
+  console.log("initialSummary",initialSummary);
+  console.log("articleSummary",articleSummary);
   const [translatedSummary, setTranslatedSummary] = useState("Translated summary will appear here.");
   const [languages, setLanguages] = useState([]);
   const [selectedLanguage, setSelectedLanguage] = useState("en");
@@ -23,7 +25,8 @@ const ArticleActions = ({articleSummary,link}) => {
         url: "https://text-translator2.p.rapidapi.com/getLanguages",
         headers: {
           "X-RapidAPI-Key":
-            "6d90c4ceefmsh2a38b0206a4488ep141773jsn534665224174", 
+            "edd45db06bmsh69c35dcdc4819b6p1cb005jsnce5dacd04037",
+            //edd45db06bmsh69c35dcdc4819b6p1cb005jsnce5dacd04037 
             // 6d90c4ceefmsh2a38b0206a4488ep141773jsn534665224174
           "X-RapidAPI-Host": "text-translator2.p.rapidapi.com",
         },
@@ -33,6 +36,7 @@ const ArticleActions = ({articleSummary,link}) => {
         console.log("Fetched Languages:", response.data.data.languages);
         setLanguages(response.data.data.languages);
       } catch (error) {
+        // console.log(response)
         console.error("Error fetching languages:", error);
       }
     };
@@ -104,8 +108,21 @@ const ArticleActions = ({articleSummary,link}) => {
    const handleTranslation = async () => {
     const encodedParams = new URLSearchParams();
     encodedParams.set("source_language", "en");
-    encodedParams.set("target_language", selectedLanguage);
-    encodedParams.set("text", initialSummary);
+    function extractTextBetweenParentheses(str) {
+      const regex = /\((.*?)\)/g;
+      const matches = str.match(regex);
+      if (matches && matches.length > 0) {
+        return matches.map((match) => match.slice(1, -1));
+      } else {
+        return [];
+      }
+    }
+    const keywords = extractTextBetweenParentheses(selectedLanguage); 
+    console.log("Keywords:", keywords[0]);   
+    encodedParams.set("target_language", keywords[0]);
+    console.log("Article summary:", articleSummary);
+    console.log("Initial summary:", initialSummary);
+    encodedParams.set("text", articleSummary);
 
     const options = {
       method: "POST",
@@ -119,13 +136,18 @@ const ArticleActions = ({articleSummary,link}) => {
     };
     console.log("Translating summary...");
     console.log("Translation options:", options);
-    console.log(initialSummary)
+    // console.log(initialSummary)
     console.log(selectedLanguage)
 
     try {
       const response = await axios.request(options);
-      const translatedText = response.data.translatedText;
-      setTranslatedSummary(translatedText);
+      // console.log("Translation response:", response.data);
+      // console.log("TranslatedText:", response.data.data.translatedText);
+      setInitialSummary(response.data.data.translatedText);
+      // console.log("Translated summary:", response.data.translatedText);
+      // // const translatedText = response.data.translatedText;
+      console.log("Translation succesfull");
+      setTranslatedSummary(response.data.data.translatedText);
     } catch (error) {
       console.error("Error translating summary:", error);
       console.log("Error response:", error.response);
@@ -144,7 +166,7 @@ const ArticleActions = ({articleSummary,link}) => {
         {/* Display available languages drop down */}
         <div className="flex justify-center items-center ">
           {languages.length > 0 ? ( // Conditionally render the select element when languages are available
-            <div className="flex items-center justify-between gap-2 w-full">
+            <div className="flex items-center justify-between gap-2 w-fit">
               <label
                 htmlFor="languages"
                 className="font-satoshi font-bold text-gray-600"
@@ -158,7 +180,7 @@ const ArticleActions = ({articleSummary,link}) => {
                 id="languages"
                 value={selectedLanguage}
                 onChange={handleLanguageChange}
-                className="lg:w-32 sm:w-1/2 w-12 flex bg-blue-500 border rounded-md  text-white p-1"
+                className="sm:w-20  w-32 flex bg-blue-500 border rounded-md  text-white p-1"
               >
                 {languages.map((language) => (
                   <option
@@ -166,7 +188,7 @@ const ArticleActions = ({articleSummary,link}) => {
                     key={language.language}
                     value={language.language}
                   >
-                    {language.name}
+                    {language.name+" ("+language.code+")"}
                   </option>
                 ))}
               </select>
@@ -215,7 +237,7 @@ const ArticleActions = ({articleSummary,link}) => {
         </button>
       </div>
     </motion.div>
-      <div className="summary_box mt-2 text-sm text-slate-400" id="translated-text-box">{translatedSummary}</div>
+      <div className="summary_box mt-2 text-sm " id="translated-text-box" placeholder="Translated text will apear here" pla>{translatedSummary}</div>
     </>
   );
 };
