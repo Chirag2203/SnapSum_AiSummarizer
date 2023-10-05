@@ -71,7 +71,7 @@ const PDFDocument = ({ summary, link }) => (
       {/* Header */}
       <View style={styles.header}>
         <Image src={logo} style={styles.logo} />
-        <Text style={styles.headerText}>Snap Sum</Text>
+        <Text style={styles.headerText}>Snap Sum </Text>
       </View>
 
       {/* Main Content */}

@@ -4,11 +4,15 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        satoshi: ['Satoshi', 'sans-serif'],
+        satoshi: ['satoshi','poppins', 'sans-serif', 'ui-sans-serif', 'system-ui'],
         inter: ['Inter', 'sans-serif'],
-      }
+      },
+      colors: {
+        primary: '#2563eb',
+        secondary:'#a855f7',
+        contrast: '#f97316'
+      },
     },
   },
   plugins: [],
 }
-

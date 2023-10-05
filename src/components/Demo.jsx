@@ -17,6 +17,7 @@ const Demo = () => {
   });
   const [allArticles, setAllArticles] = useState([]);
   const [copied, setCopied] = useState("");
+  const [translatedSummary, setTranslatedSummary]= useState("");
 
 
   // RTK lazy query
@@ -76,7 +77,7 @@ const Demo = () => {
 
   return (
     <motion.div {...fadeInAnimation} className="w-full">
-      <section className="mt-16  flex-col items-center h-fit w-full md:w-xl flex justify-center  ">
+      <section className="mt-16  flex-col items-center justify-start h-auto min-h-screen w-full md:w-xl flex  ">
         {/* Search */}
         <div className="flex flex-col  gap-2 w-full sm:w-2/3 align-middle ">
           <form
@@ -116,7 +117,7 @@ const Demo = () => {
           </form>
 
           {/* Browse History */}
-          <div className="flex flex-col gap-1 max-h-60 overflow-y-auto w-full ">
+          <div className="flex flex-col gap-1 max-h-60 overflow-y-auto w-full text-black ">
             {allArticles.reverse().map((item, index) => (
               <div
                 key={`link-${index}`}
@@ -180,17 +181,17 @@ const Demo = () => {
           ) : (
             article.summary && (
               <div className="flex flex-col gap-3 ">
-                <h2 className="font-satoshi font-bold text-gray-600 text-xl">
+                <h2 className="font-satoshi font-bold text-gray-800 text-xl">
                   Article <span className="blue_gradient">Summary</span>
                 </h2>
-                <div className="summary_box flex flex-col items-end justify-end">
+                <div className="summary_box p-4  flex flex-col items-end justify-end">
                   {/* <p className='font-inter font-medium text-sm text-gray-700'> */}
                   {article.translatedSummary ? (
-                    <p className="font-inter font-medium text-sm text-gray-700">
+                    <p className="font-inter  font-medium text-sm text-gray-900 ">
                       {article.translatedSummary}
                     </p>
                   ) : (
-                    <p className="font-inter font-medium text-sm text-gray-700">
+                    <p className="font-inter  font-medium text-sm text-gray-700">
                       {article.summary}
                     </p>
                   )}
@@ -199,6 +200,8 @@ const Demo = () => {
                 <ArticleActions
                   articleSummary={article.summary}
                   link={article.url}
+                  translatedSummary={translatedSummary}
+                  setTranslatedSummary={setTranslatedSummary}
                 />
                   
               </div>

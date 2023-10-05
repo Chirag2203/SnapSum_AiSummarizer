@@ -92,10 +92,14 @@ const KnowMore = () => {
         <span className='orange_gradient text-4xl md:text-6xl font-black'>Snap Sum</span>
 
         {/* <span className='blue_gradient text-4xl font-black'>What is Snap Sum?</span> */}
-        <p className='text-xl sm:text-2xl w-3/4 flex text-center brand  '>
-          Snap Sum is a free tool that summarizes articles and Web pages for you. Save time and get the gist! This app
-          is built using React and RapidAPI
+        <p className='text-lg sm:text-2xl w-3/4 flex text-center brand font-satoshi summary_box  '>
+         Snap Sum is a web application that summarizes articles and translates them into different languages. It also provides a few other features like getting jokes and facts. <br />
+         You can choose from three plans available: <br /> Free, standard and Premium and can work accordingly <br /> These summaries can be hared to whataspp and can also be downloaded as pdf.
         </p>
+        <span className='text-center text-rose-600'>
+        <span>Features Under Build-</span><br />
+          Plans, User Profiles, Data storage, Summarize Pdf, Payments,
+        </span>
 
         <Link to='/'>
           <button className='cssbuttons-io-button mt-5 sm:mt-16 mb-16 px-12 flex'>

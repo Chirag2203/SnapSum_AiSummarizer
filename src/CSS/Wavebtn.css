@@ -1,0 +1,42 @@
+.Wavebtn {
+    width: 80px;
+    height: 35px;
+    border-radius: 10px;
+    background-color: transparent;
+    overflow: hidden;
+    position: relative;
+    /* font-weight: 500; */
+    border: 1px solid #2563eb;
+    transition: 300ms ease;
+    text-align: center;
+    align-content: center;
+  }
+  .dark-mode .Wavebtn {
+    border: 1px solid #fff;
+    color: #fff;
+  }
+  
+  .Wavebtn::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: #2563eb;
+    top: 100%;
+    left: 0;
+    transition: 500ms ease;
+  }
+  
+  .Wavebtn:hover {
+    color: #fff;
+    letter-spacing: 3px;
+  }
+  
+  .Wavebtn:hover::before {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  

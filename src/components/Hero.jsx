@@ -6,16 +6,16 @@ import { slideRightAnimation } from "./animation";
 
 const Hero = () => {
   return (
-    <motion.div {...slideRightAnimation} className="flex flex-col items-center h-screen">
+    <motion.div {...slideRightAnimation} className="flex flex-col items-center h-auto min-h-screen">
     
     <header className='w-full flex justify-center items-center flex-col '>
 
       <h1 className='head_text'>
-        Summarize Articles with <br className='max-md:hidden' />
-        <span className='orange_gradient '> <br className="sm:hidden" /> Snap Sum  Using AI</span>
+        Summarize and Share <br className='max-md:hidden' />
+        <span className='orange_gradient '> <br className="sm:hidden" /> Articles Using AI</span>
       </h1>
-      <h2 className='desc'>
-        SnapSum is a free tool that summarizes articles and Web pages for you.
+      <h2 className='desc '>
+        SnapSum is a free tool that summarizes articles, Web pages for you and allows you to share them with your friends and colleagues.
         <br className='max-md:hidden' />
         <span className='blue_gradient'> <br className="sm:hidden"/>Save time and get the gist!</span>
         

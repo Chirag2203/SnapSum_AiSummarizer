@@ -6,13 +6,17 @@ import sound from "../assets/sound.gif";
 import mute from "../assets/mute.gif";
 import axios from "axios";
 import { copy, tick } from "../assets";
-import PDFDownloadButton from "./PDFDownloadButton";
-const ArticleActions = ({articleSummary,link}) => {
-
+import PDFDownloadButton from "../Buttons/PDFDownloadButton";
+const ArticleActions = ({
+  articleSummary,
+  link,
+  translatedSummary,
+  setTranslatedSummary,
+}) => {
   const [initialSummary, setInitialSummary] = useState("");
-  console.log("initialSummary",initialSummary);
-  console.log("articleSummary",articleSummary);
-  const [translatedSummary, setTranslatedSummary] = useState("Translated summary will appear here.");
+  console.log("initialSummary", initialSummary);
+  console.log("articleSummary", articleSummary);
+  // const [translatedSummary, setTranslatedSummary] = useState("");
   const [languages, setLanguages] = useState([]);
   const [selectedLanguage, setSelectedLanguage] = useState("en");
   useEffect(() => {
@@ -26,8 +30,8 @@ const ArticleActions = ({articleSummary,link}) => {
         headers: {
           "X-RapidAPI-Key":
             "edd45db06bmsh69c35dcdc4819b6p1cb005jsnce5dacd04037",
-            //edd45db06bmsh69c35dcdc4819b6p1cb005jsnce5dacd04037 
-            // 6d90c4ceefmsh2a38b0206a4488ep141773jsn534665224174
+          //edd45db06bmsh69c35dcdc4819b6p1cb005jsnce5dacd04037
+          // 6d90c4ceefmsh2a38b0206a4488ep141773jsn534665224174
           "X-RapidAPI-Host": "text-translator2.p.rapidapi.com",
         },
       };
@@ -49,7 +53,7 @@ const ArticleActions = ({articleSummary,link}) => {
     setSelectedLanguage(e.target.value);
   };
 
-  // Function to speak the translated text
+  // Function to speak the translated text using web Speech API
   const [isSpeaking, setIsSpeaking] = useState(false);
   const speakText = (text) => {
     try {
@@ -81,7 +85,6 @@ const ArticleActions = ({articleSummary,link}) => {
     setSumCopy(articleSummary);
   };
 
-
   const createWhatsAppShareLink = () => {
     const text = `Check out this article summary: ${article.summary}`;
     const encodedText = encodeURIComponent(text);
@@ -94,18 +97,16 @@ const ArticleActions = ({articleSummary,link}) => {
     window.open(shareLink, "_blank");
   };
 
-
   const [sumcopy, setSumCopy] = useState("");
   const handleSumCopy = (copySum) => {
     setSumCopy(copySum);
     navigator.clipboard.writeText(copySum);
     setTimeout(() => setSumCopy(false), 3000);
   };
-  
 
   // // Function to handle translation
-   // Function to handle translation
-   const handleTranslation = async () => {
+  // Function to handle translation
+  const handleTranslation = async () => {
     const encodedParams = new URLSearchParams();
     encodedParams.set("source_language", "en");
     function extractTextBetweenParentheses(str) {
@@ -117,8 +118,8 @@ const ArticleActions = ({articleSummary,link}) => {
         return [];
       }
     }
-    const keywords = extractTextBetweenParentheses(selectedLanguage); 
-    console.log("Keywords:", keywords[0]);   
+    const keywords = extractTextBetweenParentheses(selectedLanguage);
+    console.log("Keywords:", keywords[0]);
     encodedParams.set("target_language", keywords[0]);
     console.log("Article summary:", articleSummary);
     console.log("Initial summary:", initialSummary);
@@ -137,7 +138,7 @@ const ArticleActions = ({articleSummary,link}) => {
     console.log("Translating summary...");
     console.log("Translation options:", options);
     // console.log(initialSummary)
-    console.log(selectedLanguage)
+    console.log(selectedLanguage);
 
     try {
       const response = await axios.request(options);
@@ -155,88 +156,87 @@ const ArticleActions = ({articleSummary,link}) => {
     }
   };
 
-
   return (
     <>
-    <motion.div
-      className="flex items-center justify-between summary_box w-full flex-col md:flex-row gap-3 lg:gap-0 "
-      {...fadeInAnimation}
-    >
-      <div className="flex  items-center md:gap-2">
-        {/* Display available languages drop down */}
-        <div className="flex justify-center items-center ">
-          {languages.length > 0 ? ( // Conditionally render the select element when languages are available
-            <div className="flex items-center justify-between gap-2 w-fit">
-              <label
-                htmlFor="languages"
-                className="font-satoshi font-bold text-gray-600"
-              >
-                {" "}
-              </label>
-              <span className="font-semibold font-satoshi">
-                Select Language
-              </span>
-              <select
-                id="languages"
-                value={selectedLanguage}
-                onChange={handleLanguageChange}
-                className="sm:w-20  w-32 flex bg-blue-500 border rounded-md  text-white p-1"
-              >
-                {languages.map((language) => (
-                  <option
-                    className="bg-blue-200 text-black "
-                    key={language.language}
-                    value={language.language}
-                  >
-                    {language.name+" ("+language.code+")"}
-                  </option>
-                ))}
-              </select>
-            </div>
-          ) : (
-            <div class="flex flex-col  items-center justify-center m-2 mb-3 md:gap-3 font-satoshi  md:mr-3 ">
-              <span className="font-semibold ">Select Language</span>
-              <div class="loader2"></div>
-            </div>
-          )}
-          {/* </div> */}
+      <motion.div
+        className="flex items-center justify-between p-4 summary_box w-full flex-col md:flex-row gap-3 lg:gap-0 "
+        {...fadeInAnimation}
+      >
+        <div className="flex  items-center md:gap-2">
+          {/* Display available languages drop down */}
+          <div className="flex justify-center items-center ">
+            {languages.length > 0 ? ( // Conditionally render the select element when languages are available
+              <div className="flex items-center justify-between gap-2 w-fit">
+                <label
+                  htmlFor="languages"
+                  className="font-satoshi font-bold text-gray-600"
+                >
+                  {" "}
+                </label>
+                <span className="font-semibold font-satoshi">
+                  Select Language
+                </span>
+                <select
+                  id="languages"
+                  value={selectedLanguage}
+                  onChange={handleLanguageChange}
+                  className="sm:w-20  w-32 flex bg-blue-500 border rounded-md  text-white p-1"
+                >
+                  {languages.map((language) => (
+                    <option
+                      className="bg-blue-200 text-black "
+                      key={language.language}
+                      value={language.language}
+                    >
+                      {language.name + " (" + language.code + ")"}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            ) : (
+              <div class="flex flex-col  items-center justify-center m-2 mb-3 md:gap-3 font-satoshi  md:mr-3 ">
+                <span className="font-semibold ">Select Language</span>
+                <div class="loader2"></div>
+              </div>
+            )}
+            {/* </div> */}
+          </div>
+          <button
+            onClick={handleTranslation}
+            className="  sm:w-16 text-center md:w-auto p-1 border rounded-md bg-blue-500 text-white"
+          >
+            Translate
+          </button>
         </div>
-        <button
-          onClick={handleTranslation}
-          className="  sm:w-16 text-center md:w-auto p-1 border rounded-md bg-blue-500 text-white"
-        >
-          Translate
-        </button>
-      </div>
 
-      <div className="flex items-center gap-2  ">
-        {/* TTS button */}
-        <button onClick={() => speakText(articleSummary)}>
-          <img
-            src={isSpeaking ? mute : sound}
-            className=" w-9 h-9 speaker mix-blend-multiply"
-            alt=""
-          />
-        </button>
-        
-        {/* Copy button */}
-        <button
-          className="w-8 h-8 bg-slate-200 flex items-center justify-center rounded-full"
-          onClick={handleCopy}
-        >
-          <img
-            src={sumcopy === articleSummary ? tick : copy}
-            alt={sumcopy === articleSummary ? "tick_icon" : "copy_icon"}
-            className="w-[50%] h-[50%] object-contain"
-          />
-        </button>
-            <PDFDownloadButton summary={articleSummary} link={link} />
-        {/* WhatsApp button */}
-        <button className="w-9 h-9" onClick={handleShareWhatsApp}>
-          <img src={whatsappIcon} alt="whatsapp_icon" />
-        </button>
-      </div>
-    </motion.div>
+        <div className="flex items-center gap-2  ">
+          {/* TTS button */}
+          <button onClick={() => speakText(articleSummary)}>
+            <img
+              src={isSpeaking ? mute : sound}
+              className=" w-9 h-9 speaker mix-blend-multiply"
+              alt=""
+            />
+          </button>
+
+          {/* Copy button */}
+          <button
+            className="w-8 h-8 bg-slate-200 flex items-center justify-center rounded-full"
+            onClick={handleCopy}
+          >
+            <img
+              src={sumcopy === articleSummary ? tick : copy}
+              alt={sumcopy === articleSummary ? "tick_icon" : "copy_icon"}
+              className="w-[50%] h-[50%] object-contain"
+            />
+          </button>
+          <PDFDownloadButton summary={articleSummary} link={link} />
+          {/* WhatsApp button */}
+          <button className="w-9 h-9" onClick={handleShareWhatsApp}>
+            <img src={whatsappIcon} alt="whatsapp_icon" />
+          </button>
+        </div>
+      </motion.div>
       <div className="summary_box mt-2 text-sm " id="translated-text-box" placeholder="Translated text will apear here" pla>{translatedSummary}</div>
     </>
   );
