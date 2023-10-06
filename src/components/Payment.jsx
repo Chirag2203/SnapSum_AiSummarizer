@@ -4,12 +4,16 @@ import {motion} from "framer-motion"
 import { fadeInAnimation,slideRightAnimation } from "./animation";
 function Payment({price}) {
   return (
-    <motion.div {...fadeInAnimation} className="w-full mx-auto items-center flex">
-        {/* <span>pay {price}</span> */}
-      <div class="modal font-satoshi items-cneter flex">
+    <motion.div {...fadeInAnimation} className="w-3/4 mx-auto md:flex-row flex-col items-center justify-center md:items-start md:justify-between flex">
+        <div className=" flex-col flex">
+        <span className="text-3xl blue_gradient uppercase text-center">Complete your Payment</span>
+        <br />
+        <span className="text-sm text-red-500 text-center my-2">Note: this feature is under build</span>
+        </div>
+      <div class="modal font-satoshi items-center flex">
         <form class="form">
           <div class="payment--options">
-            <button name="paypal" type="button">
+            <button name="paypal" type="button" className="justify-center items-center flex">
               <svg
                 xml:space="preserve"
                 viewBox="0 0 124 33"
@@ -64,7 +68,7 @@ function Payment({price}) {
                 ></path>
               </svg>
             </button>
-            <button name="apple-pay" type="button">
+            <button name="apple-pay" type="button" className="justify-center items-center flex">
               <svg
                 xml:space="preserve"
                 viewBox="0 0 512 210.2"
@@ -87,7 +91,7 @@ function Payment({price}) {
                 <g></g>
               </svg>
             </button>
-            <button name="google-pay" type="button">
+            <button name="google-pay" type="button"className="justify-center items-center flex">
               <svg
                 fill="none"
                 viewBox="0 0 80 39"
@@ -135,7 +139,7 @@ function Payment({price}) {
           </div>
           <div class="separator">
             <hr class="line" />
-            <p>or pay using credit card</p>
+            <p>or pay using credit/debit card</p>
             <hr class="line" />
           </div>
           <div class="credit-card-info--form">

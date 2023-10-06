@@ -14,14 +14,14 @@ const Nav = () => {
   const { isLoading, error } = useAuth0();
   console.log(error);
   return (
-    <div className='flex sm:w-3/4 items-center mx-auto flex-row justify-between w-full md:mb-10 pt-3 mt-1 sm:mt-5 p-0'>
-      <Link to="/" className='flex justify-center items-center md:items-start '>
+    <div className='flex lg:w-3/4 w-full  mx-auto flex-col md:flex-row  md:justify-between md:gap-0 gap-5  md:mb-10 p-10 pt-8 sm:mt-5'>
+      <Link to="/" className='flex justify-start items-center md:items-start '>
         <img src={logo} className='w-10 object-contain' />
         <span className=" mx-2 sm:mx-5 font-bold  text-lg sm:text-2xl font-satoshi brand">SnapSum</span>
       </Link>
-      <div className='flex sm:gap-2  gap-1 items-center justify-between sm:mt-0 flex-row ' >
+      <div className='flex sm:gap-2  gap-1 items-center justify-around md:justify-between sm:mt-0 flex-row ' >
         <Wavebtn name= {"Pricing"} link={"/Pricing"} />
-        <Wavebtn name= {"About"} link={"/about"} />
+        <div className='hidden sm:flex'><Wavebtn name= {"About"} link={"/about"} /></div>
         
         
         {error && alert("Login failed")&&<div className='font-bold'> X </div>}

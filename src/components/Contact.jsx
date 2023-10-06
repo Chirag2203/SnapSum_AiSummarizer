@@ -22,15 +22,15 @@ export const Contact = () => {
   };
 
   return (
-    <div div className='min-h-screen w-2/3 mx-auto flex flex-col items-center gap-5'>
-      <span className='blue_gradient text-3xl uppercase p-2'>Contact Me</span>
+    <div div className='min-h-screen w-full sm:w-3/4 mx-auto flex md:flex-row flex-col items-center md:items-start md:justify-between gap-5'>
+      <span className='blue_gradient lg:text-5xl text-4xl uppercase p-2 text-center'>Contact US</span>
 
       {isSubmitted ? ( // Conditionally render based on isSubmitted state
         <div className='text-xl font-satoshi'>
           <p>Thank you for your message! I will get back to you shortly.</p>
         </div>
       ) : (
-        <form ref={form} onSubmit={sendEmail} className='summary_box flex flex-col p-12 w-full gap-5'>
+        <form ref={form} onSubmit={sendEmail} className='summary_box flex flex-col p-12 md:w-1/2 w-full gap-5 h-2/3'>
           <div className='flex flex-col font-satoshi'>
             <label className='orange_gradient font-bold'>Name</label>
             <input type="text" name="user_name" className='rounded-lg p-1 bg-blue-50' />

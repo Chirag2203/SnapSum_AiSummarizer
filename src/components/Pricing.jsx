@@ -38,10 +38,10 @@ const PremiumPlansPage = () => {
 
   return (
     <AnimatePresence>
-      <motion.section  className="h-screen" {...fadeInAnimation}>
-        
+      <motion.section  className="min-h-screen h-auto " {...fadeInAnimation}>
+     
         <span className="prempage-header  items-center flex justify-center mt-12 bg-gradient-to-r from-blue-800 to-rose-500 bg-clip-text text-transparent text-4xl font-bold">
-          PREMIUM PLANS 
+          PREMIUM PLANS
         </span>
         <motion.div className="flex flex-wrap m-5 justify-center">
           {plans.map((plan, index) => (
